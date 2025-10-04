@@ -1,2 +1,5 @@
-# graffiti-spray-shop
-ArtMarket Shop. Web Application for sellin' spray's
+# ArtMarket - Graffiti Spray Shop
+
+ArtMarket Shop project. Web Application for sellin' spray's
+
+To be continued...
