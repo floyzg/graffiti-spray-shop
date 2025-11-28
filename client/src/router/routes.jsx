@@ -3,5 +3,5 @@ import News from "../pages/News/News";
 
 export const routes = [
   { path: "/", element: <Home /> },
-  {path: "/news", element: <News /> },
+  { path: "/news", element: <News /> },
 ];
