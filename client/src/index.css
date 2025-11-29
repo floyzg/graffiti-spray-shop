@@ -1,12 +1,13 @@
 body {
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #0b0b0c; /* темный фон вашего проекта */
+  font-family: "Inter", sans-serif;
+  background: #ffffff; /* темный фон вашего проекта */
 }
 
 #root {
+  width: 100vw;
   min-width: 375px;
   min-height: 100vh;
   overflow-x: hidden;
