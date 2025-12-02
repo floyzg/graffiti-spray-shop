@@ -1,9 +1,13 @@
+@import "./assets/fonts/fonts.css";
+@import "tailwindcss";
+
 body {
   display: flex;
   justify-content: center;
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #ffffff; /* темный фон вашего проекта */
+  font-family: "Bebas Neue", sans-serif;
+  /* font-family: "Oswald", sans-serif; */
+  background: #ffffff; /* темный фон проекта */
 }
 
 #root {
