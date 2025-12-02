@@ -1,9 +1,99 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
+import CartIcon from "../../assets/cart.svg";
+import UserIcon from "../../assets/user.svg";
+import CloseIcon from "../../assets/close.svg";
 
 function Header() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div>Header</div>
-  )
+    <>
+      {/* HEADER */}
+      <header className="fixed top-0 left-0 w-full bg-black z-50">
+        <div className="flex items-center justify-between px-4 py-4">
+          {/* BURGER */}
+          <button
+            onClick={() => setOpen(true)}
+            className="flex flex-col justify-center gap-[5px] w-6"
+          >
+            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
+            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
+            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
+          </button>
+
+          {/* LOGO TEXT */}
+          <h1
+            className="text-[30px] font-bold fontHeight-120%"
+            style={{
+              fontFamily: "Bebas Neue",
+              color: "#FF006E",
+              lineHeight: "120%",
+            }}
+          >
+            SPRAY ZONE
+          </h1>
+
+          {/* ICONS (cart + profile) */}
+          <div className="flex items-center gap-7">
+            <img src={CartIcon} alt="cart" className="w-5 h-5" />
+            <img src={UserIcon} alt="user" className="w-5 h-5" />
+          </div>
+        </div>
+
+        {/* PINK LINE */}
+        <div
+          className="w-full h-[2px]"
+          style={{ background: "rgba(255, 0, 110, 0.3)" }}
+        />
+      </header>
+
+      {/* OVERLAY MENU */}
+      <div
+        className={`fixed top-0 left-0 w-full h-full bg-black text-white z-50 transform transition-transform duration-300 ${
+          open ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="px-4 py-4 flex items-center justify-between">
+          {/* CLOSE (X) */}
+          <button onClick={() => setOpen(false)}>
+            <img src={CloseIcon} alt="close" className="w-7 h-7" />
+          </button>
+
+          <h1
+            className="text-[30px] font-bold fontHeight-120%"
+            style={{
+              fontFamily: "Bebas Neue",
+              color: "#FF006E",
+              lineHeight: "120%",
+            }}
+          >
+            SPRAY ZONE
+          </h1>
+
+          {/* ICONS (cart + profile) */}
+          <div className="flex items-center gap-7">
+            <img src={CartIcon} alt="cart" className="w-5 h-5" />
+            <img src={UserIcon} alt="user" className="w-5 h-5" />
+          </div>
+        </div>
+
+        {/* PINK LINE */}
+        <div
+          className="w-full h-[2px]"
+          style={{ background: "rgba(255, 0, 110, 0.3)" }}
+        />
+
+        {/* MENU LINKS */}
+        <div className="mt-6 px-4 flex flex-col gap-2.5 text-[28px] font-semibold leading-[1.29]">
+          <a className="uppercase">ALL PRODUCTS</a>
+          <a className="uppercase">NEWS</a>
+          <a className="uppercase">LOG IN</a>
+          <a className="uppercase">ABOUT US</a>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Header
+export default Header;
