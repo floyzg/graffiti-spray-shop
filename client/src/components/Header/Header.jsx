@@ -4,6 +4,7 @@ import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
 import CloseIcon from "../../assets/close.svg";
 
+// @TODO: Исправить отображение логотипа сьезжает влево
 function Header() {
   const [open, setOpen] = useState(false);
 
