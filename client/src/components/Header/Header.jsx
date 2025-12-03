@@ -12,7 +12,7 @@ function Header() {
     <>
       {/* HEADER */}
       <header className="fixed top-0 left-0 w-full bg-black z-50">
-        <div className="flex items-center justify-between px-4 py-4">
+        <div className="flex items-center justify-between px-[15px] py-4">
           {/* BURGER */}
           <button
             onClick={() => setOpen(true)}
@@ -30,6 +30,7 @@ function Header() {
               fontFamily: "Bebas Neue",
               color: "#FF006E",
               lineHeight: "120%",
+              textAlign: "center",
             }}
           >
             SPRAY ZONE
@@ -37,8 +38,8 @@ function Header() {
 
           {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
-            <img src={CartIcon} alt="cart" className="w-5 h-5" />
-            <img src={UserIcon} alt="user" className="w-5 h-5" />
+            <img src={CartIcon} alt="cart" className="w-5.5 h-5" />
+            <img src={UserIcon} alt="user" className="w-5.5 h-5" />
           </div>
         </div>
 
