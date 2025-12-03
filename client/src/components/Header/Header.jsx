@@ -4,7 +4,6 @@ import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
 import CloseIcon from "../../assets/close.svg";
 
-// @TODO: Исправить отображение логотипа сьезжает влево
 function Header() {
   const [open, setOpen] = useState(false);
 
@@ -18,9 +17,9 @@ function Header() {
             onClick={() => setOpen(true)}
             className="flex flex-col justify-center gap-[5px] w-6"
           >
-            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
-            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
-            <span className="h-[2px] w-full bg-white rounded-2xl"></span>
+            <span className="h-0.5 w-full bg-white rounded-2xl"></span>
+            <span className="h-0.5 w-full bg-white rounded-2xl"></span>
+            <span className="h-0.5 w-full bg-white rounded-2xl"></span>
           </button>
 
           {/* LOGO TEXT */}
@@ -38,14 +37,14 @@ function Header() {
 
           {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
-            <img src={CartIcon} alt="cart" className="w-5.5 h-5" />
-            <img src={UserIcon} alt="user" className="w-5.5 h-5" />
+            <img src={CartIcon} alt="cart" className="w-5 h-5" />
+            <img src={UserIcon} alt="user" className="w-5 h-5" />
           </div>
         </div>
 
         {/* PINK LINE */}
         <div
-          className="w-full h-[2px]"
+          className="w-full h-0.5"
           style={{ background: "rgba(255, 0, 110, 0.3)" }}
         />
       </header>
@@ -82,7 +81,7 @@ function Header() {
 
         {/* PINK LINE */}
         <div
-          className="w-full h-[2px]"
+          className="w-full h-0.5"
           style={{ background: "rgba(255, 0, 110, 0.3)" }}
         />
 
