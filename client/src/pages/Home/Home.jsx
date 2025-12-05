@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
+
 import Pink from "../../assets/pink.png"
 import Blue from "../../assets/blue.png"
 import Green from "../../assets/green.png"
@@ -9,6 +10,125 @@ import Purple from "../../assets/purple.png"
 import Yellow from "../../assets/yellow.png"
 import Red from "../../assets/red.png"
 import Silver from "../../assets/silver.png"
+
+import Palette from "../../assets/Paint_Palette.svg"
+import Truck from "../../assets/Truck.svg"
+import People from "../../assets/People.svg"
+
+const products = [
+  {
+    id: 1,
+    name: "Neon Pink Blaster",
+    brand: "Montana Premium",
+    color: "Pink",
+    price: 12.99,
+    image: Pink,
+    accent: "#FF10F0",
+  },
+  {
+    id: 2,
+    name: "Electric Blue",
+    brand: "Ironlak pro",
+    color: "Blue",
+    price: 14.99,
+    image: Blue,
+    accent: "#0077FF",
+  },
+  {
+    id: 3,
+    name: "Lime Shock",
+    brand: "Belton Molotow",
+    color: "Green",
+    price: 11.99,
+    image: Green,
+    accent: "#32FF32",
+  },
+  {
+    id: 4,
+    name: "Fire Orange",
+    brand: "Montana Gold",
+    color: "Orange",
+    price: 13.99,
+    image: Orange,
+    accent: "#FF6B35",
+  },
+  {
+    id: 5,
+    name: "Royal Purple",
+    brand: "Ironlak Sugar",
+    color: "Purple",
+    price: 12.49,
+    image: Purple,
+    accent: "#8B5CF6",
+  },
+  {
+    id: 6,
+    name: "Shock Yellow",
+    brand: "Montana Black",
+    color: "Yellow",
+    price: 10.99,
+    image: Yellow,
+    accent: "#FACC15",
+  },
+  {
+    id: 7,
+    name: "Blood Red",
+    brand: "Beltom Premium",
+    color: "Red",
+    price: 9.99,
+    image: Red,
+    accent: "#EF4444",
+  },
+  {
+    id: 8,
+    name: "Chrome Silver",
+    brand: "Montana Cans",
+    color: "Silver",
+    price: 15.99,
+    image: Silver,
+    accent: "#D1D5DB",
+  },
+  {
+    id: 9,
+    name: "Chrome Silver",
+    brand: "Montana Cans",
+    color: "Silver",
+    price: 15.99,
+    image: Silver,
+    accent: "#D1D5DB",
+  },
+];
+
+const colorOptions = [
+  "All Colors",
+  "Pink",
+  "Blue",
+  "Green",
+  "Orange",
+  "Purple",
+  "Yellow",
+  "Red",
+  "Silver",
+];
+
+const priceOptions = [
+  { label: "Price Range", value: "all" },
+  { label: "Under $11", value: "under11" },
+  { label: "$11 - $13", value: "11-13" },
+  { label: "Over $13", value: "over13" },
+];
+
+const brandOptions = [
+  "All Brands",
+  "Montana Premium",
+  "Ironlak pro",
+  "Belton Molotow",
+  "Montana Gold",
+  "Ironlak Sugar",
+  "Montana Black",
+  "Beltom Premium",
+  "Montana Cans",
+];
 
 function Home() {
   return (
@@ -360,6 +480,111 @@ function Home() {
               </div>
             </div>
           
+        </div>
+
+        <div className="w-full h-[881px] bg-[#1F2937]">
+          <div className="text-center pt-[37px] text-opacity-20">
+            <p
+              className="text-[55px] font-bold"
+              style={{
+                fontFamily: "Bebas Neue",
+                lineHeight: "140%",
+                textAlign: "center",
+              }}
+            >
+              <span style={{ color: "#FF006E" }}>STREET </span>
+              <span style={{ color: "#0077FF" }}>ART </span>
+              <span style={{ color: "#39FF14" }}>CULTURE</span>
+            </p>
+            </div>
+            <div className="text-center ml-[20px] pt-[35px] max-w-[334px]">
+            <p
+              className="text-[24px] font-bold"
+              style={{
+                fontFamily: "Bebas Neue",
+                lineHeight: "140%",
+                textAlign: "center",
+              }}
+            >
+              we are more than just a spray paint store - we’re the heartbeat of street art culture. From underground tunnels to gallery walls, our premium paints have colored the dreams of artists worldwide. Join the movement and paint your story
+            </p>
+            </div>
+
+            <div className="flex flex-col items-center mt-[55px]">
+              <div className="flex">
+              <div className="text-center">
+              <img src={Palette} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "167%"
+              }}
+              >
+                Premium quality
+              </p>
+              <p 
+              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                high-pigment formulas for vibrant, long-lasting colors
+              </p>
+              </div>
+
+              <div className="text-center">
+              <img src={Truck} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "167%"
+              }}
+              >
+                fast shipping
+              </p>
+              <p 
+              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                get your paints delivered quickly to fuel your creativity
+              </p>
+              </div>
+              </div>
+              
+              <div className="items-center pt-[9px]">
+              <img src={People} className="w-[61px] h-[61px] ml-[75px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                artist community
+              </p>
+              <p 
+              className="text-[16px] font-bold w-[164px] pl-[45px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+               join thousands of artists in our creative community
+              </p>
+              </div>
+            </div>
         </div>
       </main>
     </div>
