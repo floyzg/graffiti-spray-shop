@@ -1,365 +1,390 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
-import Pink from "../../assets/pink.png"
-import Blue from "../../assets/blue.png"
-import Green from "../../assets/green.png"
-import Orange from "../../assets/orange.png"
-import Purple from "../../assets/purple.png"
-import Yellow from "../../assets/yellow.png"
-import Red from "../../assets/red.png"
-import Silver from "../../assets/silver.png"
+
+import Pink from "../../assets/pink.png";
+import Blue from "../../assets/blue.png";
+import Green from "../../assets/green.png";
+import Orange from "../../assets/orange.png";
+import Purple from "../../assets/purple.png";
+import Yellow from "../../assets/yellow.png";
+import Red from "../../assets/red.png";
+import Silver from "../../assets/silver.png";
+
+const products = [
+  {
+    id: 1,
+    name: "Neon Pink Blaster",
+    brand: "Montana Premium",
+    color: "Pink",
+    price: 12.99,
+    image: Pink,
+    accent: "#FF10F0",
+  },
+  {
+    id: 2,
+    name: "Electric Blue",
+    brand: "Ironlak pro",
+    color: "Blue",
+    price: 14.99,
+    image: Blue,
+    accent: "#0077FF",
+  },
+  {
+    id: 3,
+    name: "Lime Shock",
+    brand: "Belton Molotow",
+    color: "Green",
+    price: 11.99,
+    image: Green,
+    accent: "#32FF32",
+  },
+  {
+    id: 4,
+    name: "Fire Orange",
+    brand: "Montana Gold",
+    color: "Orange",
+    price: 13.99,
+    image: Orange,
+    accent: "#FF6B35",
+  },
+  {
+    id: 5,
+    name: "Royal Purple",
+    brand: "Ironlak Sugar",
+    color: "Purple",
+    price: 12.49,
+    image: Purple,
+    accent: "#8B5CF6",
+  },
+  {
+    id: 6,
+    name: "Shock Yellow",
+    brand: "Montana Black",
+    color: "Yellow",
+    price: 10.99,
+    image: Yellow,
+    accent: "#FACC15",
+  },
+  {
+    id: 7,
+    name: "Blood Red",
+    brand: "Beltom Premium",
+    color: "Red",
+    price: 9.99,
+    image: Red,
+    accent: "#EF4444",
+  },
+  {
+    id: 8,
+    name: "Chrome Silver",
+    brand: "Montana Cans",
+    color: "Silver",
+    price: 15.99,
+    image: Silver,
+    accent: "#D1D5DB",
+  },
+];
+
+const colorOptions = [
+  "All Colors",
+  "Pink",
+  "Blue",
+  "Green",
+  "Orange",
+  "Purple",
+  "Yellow",
+  "Red",
+  "Silver",
+];
+
+const priceOptions = [
+  { label: "Price Range", value: "all" },
+  { label: "Under $11", value: "under11" },
+  { label: "$11 - $13", value: "11-13" },
+  { label: "Over $13", value: "over13" },
+];
+
+const brandOptions = [
+  "All Brands",
+  "Montana Premium",
+  "Ironlak pro",
+  "Belton Molotow",
+  "Montana Gold",
+  "Ironlak Sugar",
+  "Montana Black",
+  "Beltom Premium",
+  "Montana Cans",
+];
 
 function Home() {
+  const [selectedColor, setSelectedColor] = useState("All Colors");
+  const [selectedPrice, setSelectedPrice] = useState("all");
+  const [selectedBrand, setSelectedBrand] = useState("All Brands");
+
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => {
+      if (selectedColor !== "All Colors" && p.color !== selectedColor)
+        return false;
+      if (selectedBrand !== "All Brands" && p.brand !== selectedBrand)
+        return false;
+
+      if (selectedPrice === "under11" && !(p.price < 11)) return false;
+      if (selectedPrice === "11-13" && !(p.price >= 11 && p.price <= 13))
+        return false;
+      if (selectedPrice === "over13" && !(p.price > 13)) return false;
+
+      return true;
+    });
+  }, [selectedColor, selectedPrice, selectedBrand]);
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Первый экран: header + hero */}
+    <div className="flex flex-col min-h-screen bg-[#111827]">
       <div className="h-screen flex flex-col">
         <Header />
         <Hero className="flex-1" />
       </div>
-      {/* Дальше уже идёт контент: фильтры, товары и т.п. */}
+
       <main className="flex-1">
-        {/* сюда потом вставишь фильтры/список товаров */}
-        {/* Filter */}
-        <div 
-          className="w-full h-full border-y-[2px] "
+        <div
+          className="w-full border-y-[2px]"
           style={{
             borderColor: "rgba(0, 212, 255, 1.0)",
-            backgroundColor: "rgba(31, 41, 55, 1.0)"
+            backgroundColor: "rgba(31, 41, 55, 1.0)",
           }}
         >
-          <p 
-          className="text-[16px] font-bold fontHeight-124% px-[15px] py-[11px]"
-          style={{
-            fontFamily: "Oswald",
-            color: "#00D4FF",
-            lineHeight: "124%",
-            textAlign: "left"
-          }}
+          <p
+            className="text-[16px] leading-[1.60] font-bold px-[15px] py-[11px]"
+            style={{
+              fontFamily: "Oswald",
+              color: "#00D4FF",
+            }}
           >
             FILTER BY:
           </p>
-          {/* Menu elements */}
-          <div className="w-full h-[44px] flex items-center gap-[9px]">
-            {/* All colors */}
-          <div
-          className="relative left-[15px] mb-[11px] w-[110px] h-full rounded-[4px] border text-center"
-          style={{
-            borderColor: "#4B5563",
-            backgroundColor: "#374151",
-          }}
-          >
-            <p
-            className="text-[16px] py-[10px]"
-            style={{
-              fontFamily: "Oswald"
-            }}
-            >
-              All Colors
-            </p>
-          </div>
 
-             {/* Price range */}
-          <div
-          className="relative left-[15px] mb-[11px] w-[123px] h-full rounded-[4px] border text-center"
-          style={{
-            borderColor: "#4B5563",
-            backgroundColor: "#374151",
-          }}
-          >
-            <p
-            className="text-[16px] py-[10px]"
-            style={{
-              fontFamily: "Oswald"
-            }}
-            >
-              Price Range
-            </p>
-          </div>
-          {/* All Brands */}
-          <div
-          className="relative left-[15px] mb-[11px] w-[110px] h-full rounded-[4px] border text-center"
-          style={{
-            borderColor: "#4B5563",
-            backgroundColor: "#374151",
-          }}
-          >
-            <p
-            className="text-[16px] py-[10px]"
-            style={{
-              fontFamily: "Oswald"
-            }}
-            >
-              Price Range
-            </p>
-          </div>
+          <div className="w-full h-[44px] flex items-center gap-[8px] pb-[11px]">
+            {/* COLORS */}
+            <div className="relative left-[15px] h-full">
+              <button
+                onClick={() =>
+                  setOpenDropdown(openDropdown === "color" ? null : "color")
+                }
+                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
+                style={{
+                  borderColor: "#4B5563",
+                  backgroundColor: "#374151",
+                  fontFamily: "Oswald",
+                }}
+              >
+                {selectedColor}{" "}
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7.32201 10.0939C7.52257 9.90093 7.79154 9.79549 8.06981 9.80074C8.34807 9.80599 8.61287 9.9215 8.80601 10.1219L14 15.6351L19.194 10.1219C19.2884 10.0178 19.4028 9.93374 19.5303 9.87466C19.6578 9.81558 19.7958 9.78269 19.9363 9.77794C20.0767 9.7732 20.2167 9.79669 20.3479 9.84703C20.4791 9.89737 20.5988 9.97353 20.7001 10.071C20.8013 10.1685 20.8819 10.2853 20.9372 10.4145C20.9924 10.5437 21.0212 10.6827 21.0217 10.8232C21.0223 10.9637 20.9946 11.1029 20.9404 11.2326C20.8862 11.3622 20.8065 11.4796 20.706 11.5779L14.756 17.8779C14.6581 17.9795 14.5406 18.0603 14.4107 18.1156C14.2808 18.1708 14.1412 18.1992 14 18.1992C13.8589 18.1992 13.7192 18.1708 13.5893 18.1156C13.4594 18.0603 13.342 17.9795 13.244 17.8779L7.29401 11.5779C7.10105 11.3773 6.99561 11.1084 7.00086 10.8301C7.00611 10.5518 7.12162 10.287 7.32201 10.0939Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
 
+              {openDropdown === "color" && (
+                <div className="absolute z-10 mt-1 w-full rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                  {colorOptions.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => {
+                        setSelectedColor(c);
+                        setOpenDropdown(null);
+                      }}
+                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      style={{ fontFamily: "Oswald" }}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* PRICE */}
+            <div className="relative left-[15px] h-full">
+              <button
+                onClick={() =>
+                  setOpenDropdown(openDropdown === "price" ? null : "price")
+                }
+                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
+                style={{
+                  borderColor: "#4B5563",
+                  backgroundColor: "#374151",
+                  fontFamily: "Oswald",
+                }}
+              >
+                {priceOptions.find((opt) => opt.value === selectedPrice)?.label}{" "}
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7.32201 10.0939C7.52257 9.90093 7.79154 9.79549 8.06981 9.80074C8.34807 9.80599 8.61287 9.9215 8.80601 10.1219L14 15.6351L19.194 10.1219C19.2884 10.0178 19.4028 9.93374 19.5303 9.87466C19.6578 9.81558 19.7958 9.78269 19.9363 9.77794C20.0767 9.7732 20.2167 9.79669 20.3479 9.84703C20.4791 9.89737 20.5988 9.97353 20.7001 10.071C20.8013 10.1685 20.8819 10.2853 20.9372 10.4145C20.9924 10.5437 21.0212 10.6827 21.0217 10.8232C21.0223 10.9637 20.9946 11.1029 20.9404 11.2326C20.8862 11.3622 20.8065 11.4796 20.706 11.5779L14.756 17.8779C14.6581 17.9795 14.5406 18.0603 14.4107 18.1156C14.2808 18.1708 14.1412 18.1992 14 18.1992C13.8589 18.1992 13.7192 18.1708 13.5893 18.1156C13.4594 18.0603 13.342 17.9795 13.244 17.8779L7.29401 11.5779C7.10105 11.3773 6.99561 11.1084 7.00086 10.8301C7.00611 10.5518 7.12162 10.287 7.32201 10.0939Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+
+              {openDropdown === "price" && (
+                <div className="absolute z-10 mt-1 w-full rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                  {priceOptions.map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => {
+                        setSelectedPrice(opt.value);
+                        setOpenDropdown(null);
+                      }}
+                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      style={{ fontFamily: "Oswald" }}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* BRANDS */}
+            <div className="relative left-[15px] h-full">
+              <button
+                onClick={() =>
+                  setOpenDropdown(openDropdown === "brand" ? null : "brand")
+                }
+                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2"
+                style={{
+                  borderColor: "#4B5563",
+                  backgroundColor: "#374151",
+                  fontFamily: "Oswald",
+                }}
+              >
+                {selectedBrand}{" "}
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7.32201 10.0939C7.52257 9.90093 7.79154 9.79549 8.06981 9.80074C8.34807 9.80599 8.61287 9.9215 8.80601 10.1219L14 15.6351L19.194 10.1219C19.2884 10.0178 19.4028 9.93374 19.5303 9.87466C19.6578 9.81558 19.7958 9.78269 19.9363 9.77794C20.0767 9.7732 20.2167 9.79669 20.3479 9.84703C20.4791 9.89737 20.5988 9.97353 20.7001 10.071C20.8013 10.1685 20.8819 10.2853 20.9372 10.4145C20.9924 10.5437 21.0212 10.6827 21.0217 10.8232C21.0223 10.9637 20.9946 11.1029 20.9404 11.2326C20.8862 11.3622 20.8065 11.4796 20.706 11.5779L14.756 17.8779C14.6581 17.9795 14.5406 18.0603 14.4107 18.1156C14.2808 18.1708 14.1412 18.1992 14 18.1992C13.8589 18.1992 13.7192 18.1708 13.5893 18.1156C13.4594 18.0603 13.342 17.9795 13.244 17.8779L7.29401 11.5779C7.10105 11.3773 6.99561 11.1084 7.00086 10.8301C7.00611 10.5518 7.12162 10.287 7.32201 10.0939Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
+
+              {openDropdown === "brand" && (
+                <div className="absolute z-10 mt-1 w-[180px] rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                  {brandOptions.map((b) => (
+                    <button
+                      key={b}
+                      onClick={() => {
+                        setSelectedBrand(b);
+                        setOpenDropdown(null);
+                      }}
+                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      style={{ fontFamily: "Oswald" }}
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Product List */}
-        <div 
-        className="overflow-hidden bg-[#111827]"
-        >
-          {/* Text Container */}
+        {/* PRODUCTS */}
+        <div className="overflow-hidden bg-[#111827] pb-6">
           <div className="text-center mt-[15px]">
-            <p 
-            className="text-[36px] font-bold fontHeight-140%"
-            style={{
-              fontFamily: "Bebas Neue",
-              lineHeight: "140%",
-              textAlign: "center"
-            }}
+            <p
+              className="text-[36px] font-bold"
+              style={{
+                fontFamily: "Bebas Neue",
+                lineHeight: "140%",
+                textAlign: "center",
+              }}
             >
-              <span className="" style={{color: "#FF006E"}}>SPRAY </span>
-              <span className="" style={{color: "#0077FF"}}>COLLECTION</span>
+              <span style={{ color: "#FF006E" }}>SPRAY </span>
+              <span style={{ color: "#0077FF" }}>COLLECTION</span>
             </p>
           </div>
 
-            {/* Card Container */}
-            <div className="flex flex-nowrap overflow-x-scroll mt-[13px] ml-[15px] gap-x-[26px]">
-              {/* Pink */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Pink} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
+          <div className="flex flex-nowrap overflow-x-scroll mt-[13px] ml-[15px] gap-x-[26px] pr-4">
+            {filteredProducts.map((p) => (
+              <div
+                key={p.id}
+                className="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]"
+              >
+                <img src={p.image} className="w-full rounded-[8px]" />
+                <p
+                  className="mt-[9px] ml-[12px] font-bold text-[18px] text-white"
+                  style={{ fontFamily: "Oswald" }}
                 >
-                  Neon Pink Blaster
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Montana Premium
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#FF10F0"}}
-                >$12.99
+                  {p.name}
                 </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#FF10F0]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
+                <p
+                  className="ml-[12px] text-[14px]"
+                  style={{
+                    fontFamily: "Oswald",
+                    color: "#9CA3AF",
+                  }}
+                >
+                  {p.brand}
+                </p>
+                <p
+                  className="mt-[6px] ml-[12px] font-bold text-[18px]"
+                  style={{
+                    fontFamily: "Oswald",
+                    color: p.accent,
+                  }}
+                >
+                  ${p.price.toFixed(2)}
+                </p>
+                <button
+                  className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px]"
+                  style={{ backgroundColor: p.accent }}
+                >
+                  <p
+                    className="text-[14px] font-bold text-black"
+                    style={{
+                      fontFamily: "Oswald",
+                      textAlign: "center",
+                    }}
                   >
                     ADD TO CART
-                    </p>
+                  </p>
                 </button>
               </div>
-              {/* Blue */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Blue} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Electric Blue
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Ironlak pro
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#0077FF"}}
-                >$12.99
-                </p>
-                <button className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#0077FF]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
+            ))}
+
+            {filteredProducts.length === 0 && (
+              <div className="text-white mt-4">
+                No products for selected filters
               </div>
-              {/* Green */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Green} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Lime Shock
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Belton Molotow
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#32FF32"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#32FF32]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-              {/* Orange */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Orange} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Fire Orange
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Montana Gold
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#FF6B35"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#FF6B35]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-              {/* Purple */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Purple} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Royal Purple
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Ironlak Sugar
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#8B5CF6"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#8B5CF6]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-              {/* Yellow */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Yellow} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Shock Yellow
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Montana Black
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#FACC15"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#FACC15]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-              {/* Red */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Red} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Blood Red
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Beltom Premium
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#EF4444"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#EF4444]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-              {/* Silver */}
-              <div class="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]">
-                <img src={Silver} alt="card1" className="w-full rounded-[8px]" />
-                <p 
-                className="mt-[9px] ml-[12px] font-bold text-[18px]" 
-                style={{fontFamily: "Oswald", lineHeight: "128%" }}
-                >
-                  Chrome Silver
-                  </p>
-                <p 
-                className="ml-[12px] font-regular text-[14px]"
-                style={{fontFamily: "Oswald", lineHeight: "120%", color: "#9CA3AF"}}
-                >
-                  Montana Cans
-                  </p>
-                <p 
-                className="mt-[6px] ml-[12px] font-bold text-[18px]"
-                style={{fontFamily: "Oswald", lineHeight: "128%", color: "#D1D5DB"}}
-                >$12.99
-                </p>
-                <button 
-                className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px] bg-[#D1D5DB]">
-                  <p 
-                  className="text-[14px] font-bold"
-                  style={{fontFamily: "Oswald", textAlign: "center"}}
-                  >
-                    ADD TO CART
-                    </p>
-                </button>
-              </div>
-            </div>
-          
+            )}
+          </div>
         </div>
       </main>
     </div>
@@ -367,14 +392,3 @@ function Home() {
 }
 
 export default Home;
-
-<div className="flex flex-col min-h-screen">
-  {/* Header + Hero section */}
-  <div className="h-screen flex flex-col">
-    <Header />
-    <Hero />
-  </div>
-
-  {/* Rest of content */}
-  <div className="flex-1">{/* Your content here */}</div>
-</div>;
