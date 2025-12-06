@@ -364,7 +364,7 @@ function Home() {
         </div>
 
         {/* PRODUCTS */}
-        <div className="overflow-hidden bg-[#111827] pb-6">
+        <div id="products" className="overflow-hidden bg-[#111827] pb-6">
           <div className="text-center mt-[15px]">
             <p
               className="text-[36px] font-bold"
@@ -392,7 +392,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="w-full bg-[#1F2937]">
+        <div id="aboutus" className="w-full bg-[#1F2937]">
           <div className="text-center pt-[37px] text-opacity-20">
             <p
               className="text-[55px] font-bold"

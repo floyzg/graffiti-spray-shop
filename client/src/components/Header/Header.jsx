@@ -87,10 +87,26 @@ function Header() {
 
         {/* MENU LINKS */}
         <div className="mt-6 px-4 flex flex-col gap-2.5 text-[28px] font-semibold leading-[1.29]">
-          <a className="uppercase">ALL PRODUCTS</a>
-          <a className="uppercase">NEWS</a>
-          <a className="uppercase">LOG IN</a>
-          <a className="uppercase">ABOUT US</a>
+          <a
+            className="uppercase"
+            href="#products"
+            onClick={() => setOpen(false)}
+          >
+            ALL PRODUCTS
+          </a>
+          <a className="uppercase" href="/news" onClick={() => setOpen(false)}>
+            NEWS
+          </a>
+          <a className="uppercase" href="/auth" onClick={() => setOpen(false)}>
+            LOG IN
+          </a>
+          <a
+            className="uppercase"
+            href="#aboutus"
+            onClick={() => setOpen(false)}
+          >
+            ABOUT US
+          </a>
         </div>
       </div>
     </>
