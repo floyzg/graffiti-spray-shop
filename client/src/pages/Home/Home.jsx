@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Hero from "../../components/Hero/Hero";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 import Pink from "../../assets/pink.png";
 import Blue from "../../assets/blue.png";
@@ -380,50 +381,7 @@ function Home() {
 
           <div className="flex flex-nowrap overflow-x-scroll mt-[13px] ml-[15px] gap-x-[26px] pr-4">
             {filteredProducts.map((p) => (
-              <div
-                key={p.id}
-                className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg"
-              >
-                <img src={p.image} className="w-full rounded-lg" />
-                <p
-                  className="mt-[9px] ml-3 font-bold text-[18px] text-white"
-                  style={{ fontFamily: "Oswald" }}
-                >
-                  {p.name}
-                </p>
-                <p
-                  className="ml-3-[14px]"
-                  style={{
-                    fontFamily: "Oswald",
-                    color: "#9CA3AF",
-                  }}
-                >
-                  {p.brand}
-                </p>
-                <p
-                  className="mt-1.5 ml-3 font-bold text-[18px]"
-                  style={{
-                    fontFamily: "Oswald",
-                    color: p.accent,
-                  }}
-                >
-                  ${p.price.toFixed(2)}
-                </p>
-                <button
-                  className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
-                  style={{ backgroundColor: p.accent }}
-                >
-                  <p
-                    className="text-[14px] font-bold text-black"
-                    style={{
-                      fontFamily: "Oswald",
-                      textAlign: "center",
-                    }}
-                  >
-                    ADD TO CART
-                  </p>
-                </button>
-              </div>
+              <ProductCard key={p.id} product={p} />
             ))}
 
             {filteredProducts.length === 0 && (
