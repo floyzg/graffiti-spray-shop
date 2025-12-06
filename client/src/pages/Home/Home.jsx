@@ -2,14 +2,18 @@ import React, { useState, useMemo } from "react";
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
 
-import Pink from "../../assets/pink.png";
-import Blue from "../../assets/blue.png";
-import Green from "../../assets/green.png";
-import Orange from "../../assets/orange.png";
-import Purple from "../../assets/purple.png";
-import Yellow from "../../assets/yellow.png";
-import Red from "../../assets/red.png";
-import Silver from "../../assets/silver.png";
+import Pink from "../../assets/pink.png"
+import Blue from "../../assets/blue.png"
+import Green from "../../assets/green.png"
+import Orange from "../../assets/orange.png"
+import Purple from "../../assets/purple.png"
+import Yellow from "../../assets/yellow.png"
+import Red from "../../assets/red.png"
+import Silver from "../../assets/silver.png"
+
+import Palette from "../../assets/Paint_Palette.svg"
+import Truck from "../../assets/Truck.svg"
+import People from "../../assets/People.svg"
 
 const products = [
   {
@@ -394,6 +398,111 @@ function Home() {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="w-full h-[881px] bg-[#1F2937]">
+          <div className="text-center pt-[37px] text-opacity-20">
+            <p
+              className="text-[55px] font-bold"
+              style={{
+                fontFamily: "Bebas Neue",
+                lineHeight: "140%",
+                textAlign: "center",
+              }}
+            >
+              <span style={{ color: "#FF006E" }}>STREET </span>
+              <span style={{ color: "#0077FF" }}>ART </span>
+              <span style={{ color: "#39FF14" }}>CULTURE</span>
+            </p>
+            </div>
+            <div className="text-center ml-[20px] pt-[35px] max-w-[334px]">
+            <p
+              className="text-[24px] font-bold"
+              style={{
+                fontFamily: "Bebas Neue",
+                lineHeight: "140%",
+                textAlign: "center",
+              }}
+            >
+              we are more than just a spray paint store - we’re the heartbeat of street art culture. From underground tunnels to gallery walls, our premium paints have colored the dreams of artists worldwide. Join the movement and paint your story
+            </p>
+            </div>
+
+            <div className="flex flex-col items-center mt-[55px]">
+              <div className="flex">
+              <div className="text-center">
+              <img src={Palette} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "167%"
+              }}
+              >
+                Premium quality
+              </p>
+              <p 
+              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                high-pigment formulas for vibrant, long-lasting colors
+              </p>
+              </div>
+
+              <div className="text-center">
+              <img src={Truck} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "167%"
+              }}
+              >
+                fast shipping
+              </p>
+              <p 
+              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                get your paints delivered quickly to fuel your creativity
+              </p>
+              </div>
+              </div>
+              
+              <div className="items-center pt-[9px]">
+              <img src={People} className="w-[61px] h-[61px] ml-[75px]" alt="Palette"></img>
+              <p 
+              className="text-[24px] font-bold pl-[29px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+                artist community
+              </p>
+              <p 
+              className="text-[16px] font-bold w-[164px] pl-[45px]"
+              style={{
+                fontFamily: "Bebas Neue",
+                textAlign: "center",
+                lineHeight: "140%"
+              }}
+              >
+               join thousands of artists in our creative community
+              </p>
+              </div>
+            </div>
         </div>
       </main>
     </div>
