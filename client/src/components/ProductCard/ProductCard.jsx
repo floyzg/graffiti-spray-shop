@@ -1,8 +1,9 @@
-// rfce
 import React from "react";
+import { useCart } from "../../context/useCart";
 
 const ProductCard = ({ product }) => {
   const { image, name, brand, price, accent } = product;
+  const { addToCart } = useCart();
 
   return (
     <div className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg">
@@ -38,6 +39,7 @@ const ProductCard = ({ product }) => {
       <button
         className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
         style={{ backgroundColor: accent }}
+        onClick={() => addToCart(product)}
       >
         <p
           className="text-[14px] font-bold text-black"

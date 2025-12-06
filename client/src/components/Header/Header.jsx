@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
@@ -23,8 +24,9 @@ function Header() {
           </button>
 
           {/* LOGO TEXT */}
-          <h1
+          <a
             className="text-[30px] font-bold fontHeight-120%"
+            href="/"
             style={{
               fontFamily: "Bebas Neue",
               color: "#FF006E",
@@ -33,12 +35,24 @@ function Header() {
             }}
           >
             SPRAY ZONE
-          </h1>
+          </a>
 
           {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
-            <img src={CartIcon} alt="cart" className="w-5 h-5" />
-            <img src={UserIcon} alt="user" className="w-5 h-5" />
+            <Link to="/cart">
+              <img
+                src={CartIcon}
+                alt="cart"
+                className="w-5 h-5 cursor-pointer"
+              />
+            </Link>
+            <Link to="/auth">
+              <img
+                src={UserIcon}
+                alt="user"
+                className="w-5 h-5 cursor-pointer"
+              />
+            </Link>
           </div>
         </div>
 
