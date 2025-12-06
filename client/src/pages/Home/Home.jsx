@@ -1,19 +1,20 @@
 import React, { useState, useMemo } from "react";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Hero from "../../components/Hero/Hero";
 
-import Pink from "../../assets/pink.png"
-import Blue from "../../assets/blue.png"
-import Green from "../../assets/green.png"
-import Orange from "../../assets/orange.png"
-import Purple from "../../assets/purple.png"
-import Yellow from "../../assets/yellow.png"
-import Red from "../../assets/red.png"
-import Silver from "../../assets/silver.png"
+import Pink from "../../assets/pink.png";
+import Blue from "../../assets/blue.png";
+import Green from "../../assets/green.png";
+import Orange from "../../assets/orange.png";
+import Purple from "../../assets/purple.png";
+import Yellow from "../../assets/yellow.png";
+import Red from "../../assets/red.png";
+import Silver from "../../assets/silver.png";
 
-import Palette from "../../assets/Paint_Palette.svg"
-import Truck from "../../assets/Truck.svg"
-import People from "../../assets/People.svg"
+import Palette from "../../assets/Paint_Palette.svg";
+import Truck from "../../assets/Truck.svg";
+import People from "../../assets/People.svg";
 
 const products = [
   {
@@ -130,6 +131,39 @@ const brandOptions = [
   "Montana Cans",
 ];
 
+const colorCards = [
+  {
+    id: 1,
+    label: "NEON PINK",
+    gradient: "linear-gradient(135deg, #FF00A8, #FF7AE0)",
+  },
+  {
+    id: 2,
+    label: "ELECTRIC",
+    gradient: "linear-gradient(135deg, #00A2FF, #4F46E5)",
+  },
+  {
+    id: 3,
+    label: "LIME",
+    gradient: "linear-gradient(135deg, #39FF14, #16A34A)",
+  },
+  {
+    id: 4,
+    label: "FIRE",
+    gradient: "linear-gradient(135deg, #FF6B35, #F97316)",
+  },
+  {
+    id: 5,
+    label: "ROYAL",
+    gradient: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+  },
+  {
+    id: 6,
+    label: "SHOCK",
+    gradient: "linear-gradient(135deg, #FACC15, #F97316)",
+  },
+];
+
 function Home() {
   const [selectedColor, setSelectedColor] = useState("All Colors");
   const [selectedPrice, setSelectedPrice] = useState("all");
@@ -160,9 +194,9 @@ function Home() {
         <Hero className="flex-1" />
       </div>
 
-      <main className="flex-1">
+      <main className="flex-1 bg-[#1F2937]">
         <div
-          className="w-full border-y-[2px]"
+          className="w-full border-y-2"
           style={{
             borderColor: "rgba(0, 212, 255, 1.0)",
             backgroundColor: "rgba(31, 41, 55, 1.0)",
@@ -178,14 +212,14 @@ function Home() {
             FILTER BY:
           </p>
 
-          <div className="w-full h-[44px] flex items-center gap-[8px] pb-[11px]">
+          <div className="w-full min-h-11 flex items-center gap-2 pb-[11px]">
             {/* COLORS */}
             <div className="relative left-[15px] h-full">
               <button
                 onClick={() =>
                   setOpenDropdown(openDropdown === "color" ? null : "color")
                 }
-                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
+                className="gap-2 w-full h-full rounded-sm border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
                 style={{
                   borderColor: "#4B5563",
                   backgroundColor: "#374151",
@@ -210,7 +244,7 @@ function Home() {
               </button>
 
               {openDropdown === "color" && (
-                <div className="absolute z-10 mt-1 w-full rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                <div className="absolute z-10 mt-1 w-full rounded-sm border border-gray-600 bg-[#1F2937] shadow-lg">
                   {colorOptions.map((c) => (
                     <button
                       key={c}
@@ -218,7 +252,7 @@ function Home() {
                         setSelectedColor(c);
                         setOpenDropdown(null);
                       }}
-                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      className="w-full px-3 py-2.5 text-[16px] text-white hover:bg-[#374151]"
                       style={{ fontFamily: "Oswald" }}
                     >
                       {c}
@@ -234,7 +268,7 @@ function Home() {
                 onClick={() =>
                   setOpenDropdown(openDropdown === "price" ? null : "price")
                 }
-                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
+                className="gap-2 w-full h-full rounded-sm border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
                 style={{
                   borderColor: "#4B5563",
                   backgroundColor: "#374151",
@@ -259,7 +293,7 @@ function Home() {
               </button>
 
               {openDropdown === "price" && (
-                <div className="absolute z-10 mt-1 w-full rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                <div className="absolute z-10 mt-1 w-full rounded-sm border border-gray-600 bg-[#1F2937] shadow-lg">
                   {priceOptions.map((opt) => (
                     <button
                       key={opt.value}
@@ -267,7 +301,7 @@ function Home() {
                         setSelectedPrice(opt.value);
                         setOpenDropdown(null);
                       }}
-                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      className="w-full px-3 py-2.5 text-[16px] text-white hover:bg-[#374151]"
                       style={{ fontFamily: "Oswald" }}
                     >
                       {opt.label}
@@ -283,14 +317,14 @@ function Home() {
                 onClick={() =>
                   setOpenDropdown(openDropdown === "brand" ? null : "brand")
                 }
-                className="gap-2 w-full h-full rounded-[4px] border flex items-center justify-center text-white text-[16px] pl-3 pr-2"
+                className="gap-2 w-full h-full rounded-sm border flex items-center justify-center text-white text-[16px] pl-3 pr-2 pb-2.5 pt-2.5"
                 style={{
                   borderColor: "#4B5563",
                   backgroundColor: "#374151",
                   fontFamily: "Oswald",
                 }}
               >
-                {selectedBrand}{" "}
+                {selectedBrand}
                 <svg
                   width="28"
                   height="28"
@@ -308,7 +342,7 @@ function Home() {
               </button>
 
               {openDropdown === "brand" && (
-                <div className="absolute z-10 mt-1 w-[180px] rounded-[4px] border border-gray-600 bg-[#1F2937] shadow-lg">
+                <div className="absolute z-10 mt-1 w-[180px] rounded-sm border border-gray-600 bg-[#1F2937] shadow-lg">
                   {brandOptions.map((b) => (
                     <button
                       key={b}
@@ -316,7 +350,7 @@ function Home() {
                         setSelectedBrand(b);
                         setOpenDropdown(null);
                       }}
-                      className="w-full px-3 py-[10px] text-[16px] text-white hover:bg-[#374151]"
+                      className="w-full px-3 py-2.5 text-[16px] text-white hover:bg-[#374151]"
                       style={{ fontFamily: "Oswald" }}
                     >
                       {b}
@@ -348,17 +382,17 @@ function Home() {
             {filteredProducts.map((p) => (
               <div
                 key={p.id}
-                className="flex-shrink-0 w-[244px] bg-[#1F2937] rounded-[8px]"
+                className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg"
               >
-                <img src={p.image} className="w-full rounded-[8px]" />
+                <img src={p.image} className="w-full rounded-lg" />
                 <p
-                  className="mt-[9px] ml-[12px] font-bold text-[18px] text-white"
+                  className="mt-[9px] ml-3 font-bold text-[18px] text-white"
                   style={{ fontFamily: "Oswald" }}
                 >
                   {p.name}
                 </p>
                 <p
-                  className="ml-[12px] text-[14px]"
+                  className="ml-3-[14px]"
                   style={{
                     fontFamily: "Oswald",
                     color: "#9CA3AF",
@@ -367,7 +401,7 @@ function Home() {
                   {p.brand}
                 </p>
                 <p
-                  className="mt-[6px] ml-[12px] font-bold text-[18px]"
+                  className="mt-1.5 ml-3 font-bold text-[18px]"
                   style={{
                     fontFamily: "Oswald",
                     color: p.accent,
@@ -376,7 +410,7 @@ function Home() {
                   ${p.price.toFixed(2)}
                 </p>
                 <button
-                  className="w-[216px] h-[35px] ml-[12px] mb-[14px] mt-[16px] rounded-[6px]"
+                  className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
                   style={{ backgroundColor: p.accent }}
                 >
                   <p
@@ -400,7 +434,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="w-full h-[881px] bg-[#1F2937]">
+        <div className="w-full bg-[#1F2937]">
           <div className="text-center pt-[37px] text-opacity-20">
             <p
               className="text-[55px] font-bold"
@@ -414,97 +448,122 @@ function Home() {
               <span style={{ color: "#0077FF" }}>ART </span>
               <span style={{ color: "#39FF14" }}>CULTURE</span>
             </p>
-            </div>
-            <div className="text-center ml-[20px] pt-[35px] max-w-[334px]">
+          </div>
+          <div className="text-center ml-5 pt-[35px] max-w-[334px]">
             <p
-              className="text-[24px] font-bold"
+              className="text-[24px] font-bold text-white/70 text-center leading-[1.40]"
               style={{
                 fontFamily: "Bebas Neue",
-                lineHeight: "140%",
-                textAlign: "center",
               }}
             >
-              we are more than just a spray paint store - we’re the heartbeat of street art culture. From underground tunnels to gallery walls, our premium paints have colored the dreams of artists worldwide. Join the movement and paint your story
+              we are more than just a spray paint store - we’re the heartbeat of
+              street art culture. From underground tunnels to gallery walls, our
+              premium paints have colored the dreams of artists worldwide. Join
+              the movement and paint your story
             </p>
+          </div>
+
+          <div className="flex flex-col items-center mt-[55px]">
+            <div className="flex">
+              <div className="text-center">
+                <img
+                  src={Palette}
+                  className="w-[91px] h-[91px] ml-[50px]"
+                  alt="Palette"
+                ></img>
+                <p
+                  className="text-[24px] font-bold pl-[29px] leading-[1.67] text-center text-white/70"
+                  style={{
+                    fontFamily: "Bebas Neue",
+                  }}
+                >
+                  Premium quality
+                </p>
+                <p
+                  className="text-[16px] font-bold pl-[25px] mt-1 w-[175px] leading-[1.40] text-center text-white/50"
+                  style={{
+                    fontFamily: "Bebas Neue",
+                  }}
+                >
+                  high-pigment formulas for vibrant, long-lasting colors
+                </p>
+              </div>
+
+              <div className="text-center">
+                <img
+                  src={Truck}
+                  className="w-[91px] h-[91px] ml-[50px]"
+                  alt="Palette"
+                ></img>
+                <p
+                  className="text-[24px] font-bold pl-[29px] leading-[1.67] text-center text-white/70"
+                  style={{
+                    fontFamily: "Bebas Neue",
+                  }}
+                >
+                  fast shipping
+                </p>
+                <p
+                  className="text-[16px] font-bold pl-[25px] mt-1 w-[175px] leading-[1.40] text-center text-white/50"
+                  style={{
+                    fontFamily: "Bebas Neue",
+                  }}
+                >
+                  get your paints delivered quickly to fuel your creativity
+                </p>
+              </div>
             </div>
 
-            <div className="flex flex-col items-center mt-[55px]">
-              <div className="flex">
-              <div className="text-center">
-              <img src={Palette} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
-              <p 
-              className="text-[24px] font-bold pl-[29px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "167%"
-              }}
-              >
-                Premium quality
-              </p>
-              <p 
-              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "140%"
-              }}
-              >
-                high-pigment formulas for vibrant, long-lasting colors
-              </p>
-              </div>
-
-              <div className="text-center">
-              <img src={Truck} className="w-[91px] h-[91px] ml-[50px]" alt="Palette"></img>
-              <p 
-              className="text-[24px] font-bold pl-[29px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "167%"
-              }}
-              >
-                fast shipping
-              </p>
-              <p 
-              className="text-[16px] font-bold pl-[25px] mt-[4px] w-[175px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "140%"
-              }}
-              >
-                get your paints delivered quickly to fuel your creativity
-              </p>
-              </div>
-              </div>
-              
-              <div className="items-center pt-[9px]">
-              <img src={People} className="w-[61px] h-[61px] ml-[75px]" alt="Palette"></img>
-              <p 
-              className="text-[24px] font-bold pl-[29px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "140%"
-              }}
+            <div className="items-center pt-[9px]">
+              <img
+                src={People}
+                className="w-[61px] h-[61px] ml-[75px]"
+                alt="Palette"
+              ></img>
+              <p
+                className="text-[24px] font-bold pl-[29px] text-center leading-[1.67] text-white/70"
+                style={{
+                  fontFamily: "Bebas Neue",
+                }}
               >
                 artist community
               </p>
-              <p 
-              className="text-[16px] font-bold w-[164px] pl-[45px]"
-              style={{
-                fontFamily: "Bebas Neue",
-                textAlign: "center",
-                lineHeight: "140%"
-              }}
+              <p
+                className="text-[16px] font-bold w-[164px] pl-[45px] leading-[1.40] text-white/50 text-center"
+                style={{
+                  fontFamily: "Bebas Neue",
+                }}
               >
-               join thousands of artists in our creative community
+                join thousands of artists in our creative community
               </p>
-              </div>
             </div>
+          </div>
+        </div>
+
+        {/* COLOR SQUARES SECTION */}
+        <div className="mt-10 mb-[19px] flex flex-wrap justify-center gap-[18px] px-4">
+          {colorCards.map((card) => (
+            <div
+              key={card.id}
+              className="w-[150px] h-[150px] rounded-xl shadow-lg flex items-center justify-center"
+              style={{
+                background: card.gradient,
+              }}
+            >
+              <p
+                className="text-[20px] font-bold text-white text-center"
+                style={{
+                  fontFamily: "Bebas Neue",
+                  letterSpacing: "0.08em",
+                }}
+              >
+                {card.label}
+              </p>
+            </div>
+          ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
