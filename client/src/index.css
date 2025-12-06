@@ -4,6 +4,7 @@
 body {
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
   margin: 0;
   font-family: "Bebas Neue", sans-serif;
   /* font-family: "Oswald", sans-serif; */
