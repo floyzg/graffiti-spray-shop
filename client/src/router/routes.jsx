@@ -4,6 +4,7 @@ import Auth from "../pages/Auth/Auth";
 import Register from "../pages/Register/Register";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import Cart from "../pages/Cart/Cart";
+import { Navigate } from "react-router-dom";
 
 export const routes = [
   { path: "/", element: <Home /> },
@@ -12,4 +13,6 @@ export const routes = [
   { path: "/sign-up", element: <Register /> },
   { path: "/reset-password", element: <ResetPassword /> },
   { path: "/cart", element: <Cart /> },
+
+  { path: "*", element: <Navigate to="/" /> },
 ];
