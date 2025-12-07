@@ -4,7 +4,7 @@ import { useRef } from "react";
 import HeroBg from "../../assets/bg.svg";
 
 function SprayModel() {
-  const { scene } = useGLTF("/models/spray_can.glb");
+  const { scene } = useGLTF(import.meta.env.BASE_URL + "models/spray_can.glb");
   const ref = useRef();
 
   scene.position.set(0, 0, 0);
