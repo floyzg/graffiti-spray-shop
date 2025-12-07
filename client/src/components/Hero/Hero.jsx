@@ -7,11 +7,10 @@ function SprayModel() {
   const { scene } = useGLTF("/models/spray_can.glb");
   const ref = useRef();
 
-  // Центр модели
   scene.position.set(0, 0, 0);
   scene.scale.set(0.6, 0.6, 0.6);
 
-  // AUTO ROTATE — плавный
+  // AUTO ROTATE
   useFrame(() => {
     if (ref.current && !ref.current.userIsDragging) {
       ref.current.rotation.y += 0.005;
