@@ -3,11 +3,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
 import CloseIcon from "../../assets/close.svg";
+import { useCart } from "../../context/useCart";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { cart } = useCart();
+  const cartCount = cart.reduce((sum, item) => sum + item.count, 0);
 
   // Плавный переход + скролл
   const goToSection = (sectionId) => {
@@ -64,12 +67,20 @@ function Header() {
 
           {/* ICONS */}
           <div className="flex items-center gap-7">
-            <Link to="/cart">
+            <Link to="/cart" className="relative">
               <img
                 src={CartIcon}
                 alt="cart"
                 className="w-5 h-5 cursor-pointer"
               />
+              {cartCount > 0 && (
+                <div
+                  className="absolute -top-2 -right-2 bg-[#FF006E] text-white text-[11px] font-bold w-[17px] h-[17px] rounded-full flex items-center justify-center"
+                  style={{ fontFamily: "Oswald" }}
+                >
+                  {cartCount}
+                </div>
+              )}
             </Link>
             <Link to="/auth">
               <img
@@ -111,8 +122,28 @@ function Header() {
           </Link>
 
           <div className="flex items-center gap-7">
-            <img src={CartIcon} alt="cart" className="w-5 h-5" />
-            <img src={UserIcon} alt="user" className="w-5 h-5" />
+            <Link to="/cart" className="relative">
+              <img
+                src={CartIcon}
+                alt="cart"
+                className="w-5 h-5 cursor-pointer"
+              />
+              {cartCount > 0 && (
+                <div
+                  className="absolute -top-2 -right-2 bg-[#FF006E] text-white text-[11px] font-bold w-[17px] h-[17px] rounded-full flex items-center justify-center"
+                  style={{ fontFamily: "Oswald" }}
+                >
+                  {cartCount}
+                </div>
+              )}
+            </Link>
+            <Link to="/auth">
+              <img
+                src={UserIcon}
+                alt="user"
+                className="w-5 h-5 cursor-pointer"
+              />
+            </Link>
           </div>
         </div>
 

@@ -2,8 +2,11 @@ import React from "react";
 import { useCart } from "../../context/useCart";
 
 const ProductCard = ({ product }) => {
-  const { image, name, brand, price, accent } = product;
-  const { addToCart } = useCart();
+  const { image, name, brand, price, accent, id } = product;
+  const { cart, addToCart, updateCount, removeItem } = useCart();
+
+  const itemInCart = cart.find((p) => p.id === id);
+  const count = itemInCart ? itemInCart.count : 0;
 
   return (
     <div className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg">
@@ -36,21 +39,54 @@ const ProductCard = ({ product }) => {
         ${price.toFixed(2)}
       </p>
 
-      <button
-        className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
-        style={{ backgroundColor: accent }}
-        onClick={() => addToCart(product)}
-      >
-        <p
-          className="text-[14px] font-bold text-black"
-          style={{
-            fontFamily: "Oswald",
-            textAlign: "center",
-          }}
+      {/* ---- BUTTON / COUNTER SECTION ---- */}
+      {count === 0 ? (
+        <button
+          className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
+          style={{ backgroundColor: accent }}
+          onClick={() => addToCart(product)}
         >
-          ADD TO CART
-        </p>
-      </button>
+          <p
+            className="text-[14px] font-bold text-black"
+            style={{
+              fontFamily: "Oswald",
+              textAlign: "center",
+            }}
+          >
+            ADD TO CART
+          </p>
+        </button>
+      ) : (
+        <div
+          className="flex items-center justify-between w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
+          style={{ backgroundColor: accent }}
+        >
+          <button
+            onClick={() =>
+              count === 1 ? removeItem(id) : updateCount(id, count - 1)
+            }
+            className="w-10 text-black font-bold text-[20px]"
+            style={{ fontFamily: "Oswald" }}
+          >
+            -
+          </button>
+
+          <p
+            className="text-[16px] font-bold text-black"
+            style={{ fontFamily: "Oswald" }}
+          >
+            {count}
+          </p>
+
+          <button
+            onClick={() => updateCount(id, count + 1)}
+            className="w-10 text-black font-bold text-[20px]"
+            style={{ fontFamily: "Oswald" }}
+          >
+            +
+          </button>
+        </div>
+      )}
     </div>
   );
 };
