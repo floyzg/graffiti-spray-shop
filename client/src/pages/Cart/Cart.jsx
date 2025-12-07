@@ -95,7 +95,11 @@ function Cart() {
                   </span>
                 )}
 
-                <button onClick={() => updateCount(item.id, item.count + 1)}>
+                <button
+                  onClick={() =>
+                    updateCount(item.id, Math.min(item.count + 1, 9999))
+                  }
+                >
                   +
                 </button>
               </div>
