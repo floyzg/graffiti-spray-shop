@@ -1,12 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
 import CloseIcon from "../../assets/close.svg";
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Плавный переход + скролл
+  const goToSection = (sectionId) => {
+    setOpen(false);
+
+    // Если мы на / — просто прокручиваем
+    if (location.pathname === "/") {
+      setTimeout(() => {
+        document
+          .getElementById(sectionId)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    }
+
+    // Если не / — переходим на Home и потом скроллим
+    else {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById(sectionId)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 120);
+    }
+  };
 
   return (
     <>
@@ -23,9 +48,9 @@ function Header() {
             <span className="h-0.5 w-full bg-white rounded-2xl"></span>
           </button>
 
-          {/* LOGO TEXT */}
+          {/* LOGO */}
           <Link
-            className="text-[30px] font-bold fontHeight-120%"
+            className="text-[30px] font-bold"
             to="/"
             style={{
               fontFamily: "Bebas Neue",
@@ -37,7 +62,7 @@ function Header() {
             SPRAY ZONE
           </Link>
 
-          {/* ICONS (cart + profile) */}
+          {/* ICONS */}
           <div className="flex items-center gap-7">
             <Link to="/cart">
               <img
@@ -56,7 +81,6 @@ function Header() {
           </div>
         </div>
 
-        {/* PINK LINE */}
         <div
           className="w-full h-0.5"
           style={{ background: "rgba(255, 0, 110, 0.3)" }}
@@ -70,31 +94,28 @@ function Header() {
         }`}
       >
         <div className="px-4 py-4 flex items-center justify-between">
-          {/* CLOSE (X) */}
           <button onClick={() => setOpen(false)}>
             <img src={CloseIcon} alt="close" className="w-7 h-7" />
           </button>
 
           <Link
-            className="text-[30px] font-bold fontHeight-120%"
+            className="text-[30px] font-bold"
             style={{
               fontFamily: "Bebas Neue",
               color: "#FF006E",
-              lineHeight: "120%",
             }}
             to="/"
+            onClick={() => setOpen(false)}
           >
             SPRAY ZONE
           </Link>
 
-          {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
             <img src={CartIcon} alt="cart" className="w-5 h-5" />
             <img src={UserIcon} alt="user" className="w-5 h-5" />
           </div>
         </div>
 
-        {/* PINK LINE */}
         <div
           className="w-full h-0.5"
           style={{ background: "rgba(255, 0, 110, 0.3)" }}
@@ -102,26 +123,29 @@ function Header() {
 
         {/* MENU LINKS */}
         <div className="mt-6 px-4 flex flex-col gap-2.5 text-[28px] font-semibold leading-[1.29]">
-          <Link
-            className="uppercase"
-            to="/#products"
-            onClick={() => setOpen(false)}
+          {/* SCROLL TO PRODUCTS */}
+          <p
+            className="uppercase cursor-pointer"
+            onClick={() => goToSection("products")}
           >
             ALL PRODUCTS
-          </Link>
+          </p>
+
           <Link className="uppercase" to="/news" onClick={() => setOpen(false)}>
             NEWS
           </Link>
+
           <Link className="uppercase" to="/auth" onClick={() => setOpen(false)}>
             LOG IN
           </Link>
-          <Link
-            className="uppercase"
-            to="/#aboutus"
-            onClick={() => setOpen(false)}
+
+          {/* SCROLL TO ABOUT */}
+          <p
+            className="uppercase cursor-pointer"
+            onClick={() => goToSection("aboutus")}
           >
             ABOUT US
-          </Link>
+          </p>
         </div>
       </div>
     </>

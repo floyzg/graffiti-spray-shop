@@ -204,18 +204,17 @@ function Home() {
           }}
         >
           <p
-            className="text-[16px] leading-[1.60] font-bold px-[15px] py-[11px]"
+            className="text-[16px] leading-[1.60] font-bold px-[15px] py-[11px] text-[#00D4FF] text-center"
             style={{
               fontFamily: "Oswald",
-              color: "#00D4FF",
             }}
           >
-            FILTER BY:
+            FILTER BY
           </p>
 
-          <div className="w-full min-h-11 flex items-center gap-2 pb-[11px]">
+          <div className="w-full min-h-10 flex justify-center items-center gap-2 pb-[11px]">
             {/* COLORS */}
-            <div className="relative left-[15px] h-full">
+            <div className="h-full">
               <button
                 onClick={() =>
                   setOpenDropdown(openDropdown === "color" ? null : "color")
@@ -264,7 +263,7 @@ function Home() {
             </div>
 
             {/* PRICE */}
-            <div className="relative left-[15px] h-full">
+            <div className="h-full">
               <button
                 onClick={() =>
                   setOpenDropdown(openDropdown === "price" ? null : "price")
@@ -313,7 +312,7 @@ function Home() {
             </div>
 
             {/* BRANDS */}
-            <div className="relative left-[15px] h-full">
+            <div className="h-full">
               <button
                 onClick={() =>
                   setOpenDropdown(openDropdown === "brand" ? null : "brand")

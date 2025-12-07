@@ -10,9 +10,9 @@ function SprayModel() {
   scene.position.set(0, 0, 0);
   scene.scale.set(0.6, 0.6, 0.6);
 
-  // AUTO ROTATE
+  // Простое авто-вращение
   useFrame(() => {
-    if (ref.current && !ref.current.userIsDragging) {
+    if (ref.current) {
       ref.current.rotation.y += 0.005;
     }
   });
@@ -23,6 +23,7 @@ function SprayModel() {
 const Hero = () => {
   return (
     <section className="relative flex-1 overflow-hidden pt-16">
+      {/* BG */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${HeroBg})` }}
@@ -32,16 +33,19 @@ const Hero = () => {
       <div className="pointer-events-none absolute bottom-3 left-3 h-6 w-6 border-2 border-[#ff117e] border-t-0 border-r-0" />
 
       <div className="relative z-10 flex h-full min-h-[330px] items-center justify-center p-2">
-        <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
+        <Canvas
+          camera={{ position: [0, 0, 3], fov: 45 }}
+          // это главное: вертикальный свайп отдаём браузеру
+          style={{ touchAction: "pan-y" }}
+        >
           {/* LIGHT */}
           <hemisphereLight
-            groundColor={"#fff"}
+            groundColor={"#ffffff"}
             skyColor={"#ffffff"}
             intensity={8}
           />
 
-          {/* ORBIT + BLOCK AUTO-SPIN */}
-          <OrbitControls enableZoom={false} />
+          <OrbitControls enableZoom={false} enablePan={false} />
 
           <SprayModel />
         </Canvas>
