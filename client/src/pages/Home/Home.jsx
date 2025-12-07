@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Hero from "../../components/Hero/Hero";
@@ -199,6 +199,16 @@ function Home() {
     });
   }, [selectedColor, selectedPrice, selectedBrand]);
 
+  // block scroll if filter is open
+  useEffect(() => {
+    if (openDropdown) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openDropdown]);
+
   return (
     <div className="flex flex-col min-h-screen bg-[#111827]">
       <div className="h-screen flex flex-col">
@@ -332,7 +342,7 @@ function Home() {
               <span style={{ color: "#39FF14" }}>CULTURE</span>
             </p>
           </div>
-          <div className="text-center ml-5 pt-[35px] max-w-[334px]">
+          <div className="text-center pt-[35px] max-w-[334px] mx-auto px-4">
             <p
               className="text-[24px] font-bold text-white/70 text-center leading-[1.40]"
               style={{
@@ -424,19 +434,14 @@ function Home() {
         </div>
 
         {/* COLOR GRID */}
-        <div className="mt-10 mb-[19px] flex flex-wrap justify-center gap-[18px] px-4">
-          {colorCards.map((card) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 py-4 max-w-[800px] mx-auto">
+          {colorCards.map((c) => (
             <div
-              key={card.id}
-              className="w-[150px] h-[150px] rounded-xl shadow-lg flex items-center justify-center"
-              style={{ background: card.gradient }}
+              key={c.name}
+              className="h-[130px] rounded-xl flex items-center justify-center font-bold text-white text-lg"
+              style={{ background: c.gradient }}
             >
-              <p
-                className="text-[20px] font-bold text-white text-center"
-                style={{ fontFamily: "Bebas Neue", letterSpacing: "0.08em" }}
-              >
-                {card.label}
-              </p>
+              {c.label}
             </div>
           ))}
         </div>

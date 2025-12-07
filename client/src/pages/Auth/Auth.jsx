@@ -38,7 +38,7 @@ function Auth() {
     <div className="bg-[#0b1126] min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 w-full max-w-md mx-auto px-4 py-8 text-white mt-15">
+      <div className="flex-1 w-full max-w-md mx-auto px-4 py-5 text-white">
         <h2 className="text-2xl font-semibold mb-6 uppercase text-center">
           sign in
         </h2>

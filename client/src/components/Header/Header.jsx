@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CartIcon from "../../assets/cart.svg";
 import UserIcon from "../../assets/user.svg";
@@ -12,21 +12,33 @@ function Header() {
   const { cart } = useCart();
   const cartCount = cart.reduce((sum, item) => sum + item.count, 0);
 
+  // ref + измерение высоты хедера (создаем подкладку под хедером = его же высоте)
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight || 0);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
   // Плавный переход + скролл
   const goToSection = (sectionId) => {
     setOpen(false);
 
-    // Если мы на / — просто прокручиваем
     if (location.pathname === "/") {
       setTimeout(() => {
         document
           .getElementById(sectionId)
           ?.scrollIntoView({ behavior: "smooth" });
       }, 50);
-    }
-
-    // Если не / — переходим на Home и потом скроллим
-    else {
+    } else {
       navigate("/");
       setTimeout(() => {
         document
@@ -39,7 +51,10 @@ function Header() {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full bg-black z-50">
+      <header
+        ref={headerRef}
+        className="fixed top-0 left-0 w-full bg-black z-50"
+      >
         <div className="flex items-center justify-between px-[15px] py-4">
           {/* BURGER */}
           <button
@@ -98,6 +113,9 @@ function Header() {
         />
       </header>
 
+      {/* ПРОКЛАДКА ПОД FIXED-ХЕДЕРОМ, ЧТОБЫ КОНТЕНТ НЕ ПРЯТАЛСЯ */}
+      <div style={{ height: headerHeight }} />
+
       {/* OVERLAY MENU */}
       <div
         className={`fixed top-0 left-0 w-full h-full bg-black text-white z-50 transform transition-transform duration-300 ${
@@ -154,7 +172,6 @@ function Header() {
 
         {/* MENU LINKS */}
         <div className="mt-6 px-4 flex flex-col gap-2.5 text-[28px] font-semibold leading-[1.29]">
-          {/* SCROLL TO PRODUCTS */}
           <p
             className="uppercase cursor-pointer"
             onClick={() => goToSection("products")}
@@ -170,7 +187,6 @@ function Header() {
             LOG IN
           </Link>
 
-          {/* SCROLL TO ABOUT */}
           <p
             className="uppercase cursor-pointer"
             onClick={() => goToSection("aboutus")}
