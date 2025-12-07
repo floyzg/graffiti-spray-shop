@@ -24,9 +24,9 @@ function Header() {
           </button>
 
           {/* LOGO TEXT */}
-          <a
+          <Link
             className="text-[30px] font-bold fontHeight-120%"
-            href="/"
+            to="/"
             style={{
               fontFamily: "Bebas Neue",
               color: "#FF006E",
@@ -35,7 +35,7 @@ function Header() {
             }}
           >
             SPRAY ZONE
-          </a>
+          </Link>
 
           {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
@@ -75,16 +75,17 @@ function Header() {
             <img src={CloseIcon} alt="close" className="w-7 h-7" />
           </button>
 
-          <h1
+          <Link
             className="text-[30px] font-bold fontHeight-120%"
             style={{
               fontFamily: "Bebas Neue",
               color: "#FF006E",
               lineHeight: "120%",
             }}
+            to="/"
           >
             SPRAY ZONE
-          </h1>
+          </Link>
 
           {/* ICONS (cart + profile) */}
           <div className="flex items-center gap-7">
