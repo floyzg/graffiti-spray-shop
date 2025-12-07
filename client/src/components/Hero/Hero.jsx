@@ -5,13 +5,8 @@ import HeroBg from "../../assets/bg.svg";
 function SprayModel() {
   const { scene } = useGLTF("/models/spray_can.glb");
 
-  // FIX: центрируем модель
   scene.position.set(0, 0, 0);
-
-  // FIX: корректируем ориентацию (если надо)
   scene.rotation.set(0, Math.PI / 4, 0);
-
-  // FIX: уменьшаем чтобы камера не заходила внутрь
   scene.scale.set(0.6, 0.6, 0.6);
 
   return <primitive object={scene} />;
@@ -20,16 +15,11 @@ function SprayModel() {
 const Hero = () => {
   return (
     <section className="relative flex-1 overflow-hidden pt-16">
-      {/* BG */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${HeroBg})` }}
       />
-
-      {/* DARK MASK */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0,#000000b3_65%,#000000ee_100%)]" />
-
-      {/* CORNERS */}
       <div className="pointer-events-none absolute right-3 top-20 h-6 w-6 border-2 border-[#ff117e] border-b-0 border-l-0" />
       <div className="pointer-events-none absolute bottom-3 left-3 h-6 w-6 border-2 border-[#ff117e] border-t-0 border-r-0" />
 
