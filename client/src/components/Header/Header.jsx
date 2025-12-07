@@ -104,7 +104,7 @@ function Header() {
         <div className="mt-6 px-4 flex flex-col gap-2.5 text-[28px] font-semibold leading-[1.29]">
           <Link
             className="uppercase"
-            to="#products"
+            to="/#products"
             onClick={() => setOpen(false)}
           >
             ALL PRODUCTS
@@ -117,7 +117,7 @@ function Header() {
           </Link>
           <Link
             className="uppercase"
-            to="#aboutus"
+            to="/#aboutus"
             onClick={() => setOpen(false)}
           >
             ABOUT US
