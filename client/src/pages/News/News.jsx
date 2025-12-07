@@ -1,43 +1,49 @@
-import Bg from "../../assets/bg.svg";
-import Purple from "../../assets/purple.png";
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import articles from "../../data/articles";
+import { Link } from "react-router-dom";
 
-function News() {
+const News = () => {
   return (
-    <div className="bg-[#0b1126] min-h-screen">
+    <div className="bg-[#0b1126] min-h-screen flex flex-col">
       <Header />
 
-      <div className="max-w-[900px] mx-auto px-4 pt-[90px] pb-8">
-        <h1 className="text-center text-2xl font-semibold text-white mb-6">
-          NEWS
-        </h1>
+      <div className="max-w-md mx-auto w-full px-3 py-6">
+        <h1 className="text-center text-2xl text-white font-semibold">News</h1>
 
-        {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <ArticleCard
-            imageSrc={Purple}
-            badge="POPULAR"
-            title="Графити тест WeekMan Arton 100ml"
-            text="Сравниваем стойкость, яркость и насыщенность цветов. Результаты реально удивили!"
-            date="30.11.2025"
-          />
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {articles.map((a) => (
+            <Link
+              key={a.id}
+              to={`/news/${a.id}`}
+              className="bg-[#111827] rounded-md overflow-hidden shadow-md border border-[#4B5563]"
+            >
+              <img
+                src={a.image}
+                alt={a.title}
+                className="w-full h-32 object-cover"
+              />
 
-          <ArticleCard
-            imageSrc={Purple}
-            badge="SALE"
-            title="Скидки на маркеры и краску!"
-            text="Большие скидки на популярные цветовые серии. Акция до конца недели."
-            date="28.11.2025"
-          />
+              <div className="p-3">
+                <span className="text-xs font-bold text-[#FF10F0]">
+                  {a.badge}
+                </span>
+
+                <p className="mt-1 text-white font-bold text-lg leading-tight">
+                  {a.title}
+                </p>
+
+                <p className="mt-1 text-gray-400 text-sm">{a.date}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 
       <Footer />
     </div>
   );
-}
+};
 
 export default News;
