@@ -10,7 +10,7 @@
  *
  * TODO: реализовать последовательность инициализации и экспорт/запуск сервера.
  */
-import { getProducts } from "./controllers/productController.js";
+import { createProduct, deleteProduct, getProducts } from "./controllers/productController.js";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: "*",
-    methods: ["GET"],
+    methods: ["GET", "POST", "DELETE"],
   })
 );
 app.use(express.json());
@@ -36,6 +36,8 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 // routes
 app.get("/api/products", getProducts);
+app.post("/api/products", createProduct);
+app.delete("/api/products/:id", deleteProduct);
 // app.get("/api/products", (req, res) => {
 //   console.log("server: hit route!");
 //   res.json([{ test: true }]);
