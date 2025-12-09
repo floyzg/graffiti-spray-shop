@@ -10,5 +10,37 @@
  *
  * TODO: реализовать последовательность инициализации и экспорт/запуск сервера.
  */
+import { getProducts } from "./controllers/productController.js";
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
+dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET"],
+  })
+);
+app.use(express.json());
+app.use("/assets", express.static(path.join(__dirname, "assets")));
+
+// routes
+app.get("/api/products", getProducts);
+// app.get("/api/products", (req, res) => {
+//   console.log("server: hit route!");
+//   res.json([{ test: true }]);
+// });
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
