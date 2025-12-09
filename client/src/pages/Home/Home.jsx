@@ -18,90 +18,6 @@ import Palette from "../../assets/Paint_Palette.svg";
 import Truck from "../../assets/Truck.svg";
 import People from "../../assets/People.svg";
 
-const products = [
-  {
-    id: 1,
-    name: "Neon Pink Blaster",
-    brand: "Montana Premium",
-    color: "Pink",
-    price: 12.99,
-    image: Pink,
-    accent: "#FF10F0",
-  },
-  {
-    id: 2,
-    name: "Electric Blue",
-    brand: "Ironlak pro",
-    color: "Blue",
-    price: 14.99,
-    image: Blue,
-    accent: "#0077FF",
-  },
-  {
-    id: 3,
-    name: "Lime Shock",
-    brand: "Belton Molotow",
-    color: "Green",
-    price: 11.99,
-    image: Green,
-    accent: "#32FF32",
-  },
-  {
-    id: 4,
-    name: "Fire Orange",
-    brand: "Montana Gold",
-    color: "Orange",
-    price: 13.99,
-    image: Orange,
-    accent: "#FF6B35",
-  },
-  {
-    id: 5,
-    name: "Royal Purple",
-    brand: "Ironlak Sugar",
-    color: "Purple",
-    price: 12.49,
-    image: Purple,
-    accent: "#8B5CF6",
-  },
-  {
-    id: 6,
-    name: "Shock Yellow",
-    brand: "Montana Black",
-    color: "Yellow",
-    price: 10.99,
-    image: Yellow,
-    accent: "#FACC15",
-  },
-  {
-    id: 7,
-    name: "Blood Red",
-    brand: "Beltom Premium",
-    color: "Red",
-    price: 9.99,
-    image: Red,
-    accent: "#EF4444",
-  },
-  {
-    id: 8,
-    name: "Chrome Silver",
-    brand: "Montana Cans",
-    color: "Silver",
-    price: 15.99,
-    image: Silver,
-    accent: "#D1D5DB",
-  },
-  {
-    id: 9,
-    name: "Chrome Silver",
-    brand: "Montana Cans",
-    color: "Silver",
-    price: 15.99,
-    image: Silver,
-    accent: "#D1D5DB",
-  },
-];
-
 const colorOptions = [
   "All Colors",
   "Pink",
@@ -185,6 +101,17 @@ function Home() {
     setOpenDropdown(type);
   };
 
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("client received: ", data);
+        setProducts(data);
+      });
+  });
+
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       if (selectedColor !== "All Colors" && p.color !== selectedColor)
@@ -197,7 +124,7 @@ function Home() {
       if (selectedPrice === "over13" && !(p.price > 13)) return false;
       return true;
     });
-  }, [selectedColor, selectedPrice, selectedBrand]);
+  }, [products, selectedColor, selectedPrice, selectedBrand]);
 
   // block scroll if filter is open
   useEffect(() => {

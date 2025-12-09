@@ -10,7 +10,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg">
-      <img src={image} className="w-full rounded-lg" alt={name} />
+      <img
+        src={`http://localhost:4000/assets/${image}`}
+        className="w-full rounded-lg"
+        alt={name}
+      />
 
       <p
         className="mt-[9px] ml-3 font-bold text-[18px] text-white"
