@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -45,24 +46,24 @@ function Footer() {
               style={{ fontFamily: "Oswald", color: "#E5E7EB" }}
             >
               <p>
-                <a href="/products" style={{ color: "#9CA3AF" }}>
+                <Link to="/products" className="text-[#9CA3AF]">
                   All Products
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/new-arrivals" style={{ color: "#9CA3AF" }}>
-                  New Arrivals
-                </a>
+                <Link to="/news" className="text-[#9CA3AF]">
+                  News
+                </Link>
               </p>
               <p>
-                <a href="/best-sellers" style={{ color: "#9CA3AF" }}>
+                <Link to="/best-sellers" className="text-[#9CA3AF]">
                   Best Sellers
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/sale" style={{ color: "#9CA3AF" }}>
+                <Link to="/sale" className="text-[#9CA3AF]">
                   Sale Items
-                </a>
+                </Link>
               </p>
             </div>
           </div>
