@@ -5,6 +5,7 @@ import { useCart } from "../../context/useCart";
 
 function Cart() {
   const { cart, updateCount, removeItem } = useCart();
+  const API = "http://localhost:4000";
 
   const total = cart
     .reduce((sum, item) => sum + item.price * item.count, 0)
@@ -30,7 +31,7 @@ function Cart() {
             className="flex gap-4 bg-[#0d142e] rounded-md p-3 items-center mb-6 relative"
           >
             <img
-              src={item.image}
+              src={`${API}/assets/${item.image}`}
               alt={item.name}
               className="w-28 h-28 object-contain rounded-md"
             />
