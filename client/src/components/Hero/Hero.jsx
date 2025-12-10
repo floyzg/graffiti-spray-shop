@@ -32,7 +32,7 @@ const Hero = () => {
       {/* Декоративные углы – через flex, чтобы отступы были стабильные */}
       <div className="pointer-events-none absolute inset-0 flex flex-col justify-between">
         <div className="flex justify-end">
-          <div className="mt-5 mr-3 h-6 w-6 border-2 border-[#ff117e] border-b-0 border-l-0" />
+          <div className="mt-3 mr-3 h-6 w-6 border-2 border-[#ff117e] border-b-0 border-l-0" />
         </div>
         <div className="flex justify-start">
           <div className="mb-3 ml-3 h-6 w-6 border-2 border-[#ff117e] border-t-0 border-r-0" />
