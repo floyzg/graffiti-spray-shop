@@ -4,10 +4,10 @@ import { useRef } from "react";
 import HeroBg from "../../assets/bg.svg";
 
 function SprayModel() {
-  const { scene } = useGLTF(import.meta.env.BASE_URL + "models/spray_can.glb");
+  const { scene } = useGLTF(import.meta.env.BASE_URL + "models/Spray.glb");
   const ref = useRef();
 
-  scene.position.set(0, 0, 0);
+  scene.position.set(0, -0.9, 0);
   scene.scale.set(0.6, 0.6, 0.6);
 
   useFrame(() => {
@@ -41,7 +41,7 @@ const Hero = () => {
 
       <div className="relative z-10 flex h-full min-h-[330px] items-center justify-center p-2">
         <Canvas
-          camera={{ position: [0, 0, 3], fov: 45 }}
+          camera={{ position: [0, 0, 3], fov: 85 }}
           style={{ touchAction: "pan-y" }}
         >
           <hemisphereLight
