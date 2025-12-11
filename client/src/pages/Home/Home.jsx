@@ -1,18 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Hero from "../../components/Hero/Hero";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import DropdownModal from "../../components/DropdownModal/DropdownModal";
-
-import Pink from "../../assets/pink.png";
-import Blue from "../../assets/blue.png";
-import Green from "../../assets/green.png";
-import Orange from "../../assets/orange.png";
-import Purple from "../../assets/purple.png";
-import Yellow from "../../assets/yellow.png";
-import Red from "../../assets/red.png";
-import Silver from "../../assets/silver.png";
 
 import Palette from "../../assets/Paint_Palette.svg";
 import Truck from "../../assets/Truck.svg";
