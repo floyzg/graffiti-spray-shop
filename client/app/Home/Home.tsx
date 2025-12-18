@@ -117,9 +117,23 @@ export default function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/products`
-        );
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        console.log("API URL:", apiUrl);
+        
+        if (!apiUrl) {
+          console.error("NEXT_PUBLIC_API_URL is not set");
+          return;
+        }
+
+        const url = `${apiUrl}/api/products`;
+        console.log("Fetching from:", url);
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         console.log("client received: ", data);
         setProducts(data);
@@ -287,7 +301,7 @@ export default function Home() {
               <span style={{ color: "#39FF14" }}>CULTURE</span>
             </p>
           </div>
-          <div className="text-center pt-[35px] max-w-[334px] mx-auto px-4">
+          <div className="text-center pt-8.75 max-w-[334px] mx-auto px-4">
             <p
               className="text-[24px] font-bold text-white/70 text-center leading-[1.40]"
               style={{
