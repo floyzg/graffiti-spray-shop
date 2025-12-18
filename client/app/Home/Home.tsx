@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import Header from "@/app/components/Header/Header";
 import Footer from "@/app/components/Footer/Footer";
 import Hero from "@/app/components/Hero/Hero";
@@ -112,14 +113,16 @@ export default function Home() {
     setOpenDropdown(type);
   };
 
-  const [products, setProducts] = useState<(Omit<CartItem, "count"> & { color?: string })[]>([]);
+  const [products, setProducts] = useState<
+    (Omit<CartItem, "count"> & { color?: string })[]
+  >([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
         console.log("API URL:", apiUrl);
-        
+
         if (!apiUrl) {
           console.error("NEXT_PUBLIC_API_URL is not set");
           return;
@@ -127,13 +130,13 @@ export default function Home() {
 
         const url = `${apiUrl}/api/products`;
         console.log("Fetching from:", url);
-        
+
         const response = await fetch(url);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log("client received: ", data);
         setProducts(data);
@@ -184,13 +187,13 @@ export default function Home() {
           }}
         >
           <p
-            className="text-[16px] leading-[1.60] font-bold px-[15px] py-[11px] text-[#00D4FF] text-center"
+            className="text-[16px] leading-[1.60] font-bold px-3.75 py-2.75 text-[#00D4FF] text-center"
             style={{ fontFamily: "Oswald" }}
           >
             FILTER BY
           </p>
 
-          <div className="w-full min-h-10 flex justify-center items-center gap-2 pb-[11px]">
+          <div className="w-full min-h-10 flex justify-center items-center gap-2 pb-2.75">
             {/* COLOR */}
             <button
               onClick={(e) => handleDropdownOpen("color", e)}
@@ -263,7 +266,7 @@ export default function Home() {
 
         {/* PRODUCTS */}
         <div id="products" className="overflow-hidden bg-[#111827] pb-6">
-          <div className="text-center mt-[15px]">
+          <div className="text-center mt-3.75">
             <p
               className="text-[36px] font-bold"
               style={{ fontFamily: "Bebas Neue" }}
@@ -273,7 +276,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-nowrap overflow-x-scroll mt-[13px] ml-[15px] gap-x-[26px] pr-4">
+          <div className="flex flex-nowrap overflow-x-scroll mt-3.25 ml-3.75 gap-x-6.5 pr-4">
             {filteredProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -287,7 +290,7 @@ export default function Home() {
 
         {/* ABOUT US */}
         <div id="aboutus" className="w-full bg-[#1F2937]">
-          <div className="text-center pt-[37px] text-opacity-20">
+          <div className="text-center pt-9.25 text-opacity-20">
             <p
               className="text-[55px] font-bold"
               style={{
@@ -301,30 +304,32 @@ export default function Home() {
               <span style={{ color: "#39FF14" }}>CULTURE</span>
             </p>
           </div>
-          <div className="text-center pt-8.75 max-w-[334px] mx-auto px-4">
+          <div className="text-center pt-8.75 max-w-83.5 mx-auto px-4">
             <p
               className="text-[24px] font-bold text-white/70 text-center leading-[1.40]"
               style={{
                 fontFamily: "Bebas Neue",
               }}
             >
-              we are more than just a spray paint store - we're the heartbeat of
+              we are more than just a spray paint store - we are the heartbeat of
               street art culture. From underground tunnels to gallery walls, our
               premium paints have colored the dreams of artists worldwide. Join
               the movement and paint your story
             </p>
           </div>
 
-          <div className="flex flex-col items-center mt-[55px]">
+          <div className="flex flex-col items-center mt-13.75">
             <div className="flex">
               <div className="text-center">
-                <img
-                  src={Palette.src}
-                  className="w-[91px] h-[91px] ml-[50px]"
+                <Image
+                  src={Palette}
+                  width={91}
+                  height={91}
+                  className="ml-12.5"
                   alt="Palette"
                 />
                 <p
-                  className="text-[24px] font-bold pl-[29px] leading-[1.67] text-center text-white/70"
+                  className="text-[24px] font-bold pl-7.25 leading-[1.67] text-center text-white/70"
                   style={{
                     fontFamily: "Bebas Neue",
                   }}
@@ -332,7 +337,7 @@ export default function Home() {
                   Premium quality
                 </p>
                 <p
-                  className="text-[16px] font-bold pl-[25px] mt-1 w-[175px] leading-[1.40] text-center text-white/50"
+                  className="text-[16px] font-bold pl-6.25 mt-1 w-43.75 leading-[1.40] text-center text-white/50"
                   style={{
                     fontFamily: "Bebas Neue",
                   }}
@@ -342,13 +347,15 @@ export default function Home() {
               </div>
 
               <div className="text-center">
-                <img
-                  src={Truck.src}
-                  className="w-[91px] h-[91px] ml-[50px]"
+                <Image
+                  src={Truck}
+                  width={91}
+                  height={91}
+                  className="ml-12.5"
                   alt="Truck"
                 />
                 <p
-                  className="text-[24px] font-bold pl-[29px] leading-[1.67] text-center text-white/70"
+                  className="text-[24px] font-bold pl-7.25 leading-[1.67] text-center text-white/70"
                   style={{
                     fontFamily: "Bebas Neue",
                   }}
@@ -356,7 +363,7 @@ export default function Home() {
                   fast shipping
                 </p>
                 <p
-                  className="text-[16px] font-bold pl-[25px] mt-1 w-[175px] leading-[1.40] text-center text-white/50"
+                  className="text-[16px] font-bold pl-6.25 mt-1 w-43.75 leading-[1.40] text-center text-white/50"
                   style={{
                     fontFamily: "Bebas Neue",
                   }}
@@ -366,14 +373,16 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="items-center pt-[9px]">
-              <img
-                src={People.src}
-                className="w-[61px] h-[61px] ml-[75px]"
+            <div className="items-center pt-2.25">
+              <Image
+                src={People}
+                width={61}
+                height={61}
+                className="ml-18.75"
                 alt="People"
               />
               <p
-                className="text-[24px] font-bold pl-[29px] text-center leading-[1.67] text-white/70"
+                className="text-[24px] font-bold pl-7.25 text-center leading-[1.67] text-white/70"
                 style={{
                   fontFamily: "Bebas Neue",
                 }}
@@ -381,7 +390,7 @@ export default function Home() {
                 artist community
               </p>
               <p
-                className="text-[16px] font-bold w-[164px] pl-[45px] leading-[1.40] text-white/50 text-center"
+                className="text-[16px] font-bold w-41 pl-11.25 leading-[1.40] text-white/50 text-center"
                 style={{
                   fontFamily: "Bebas Neue",
                 }}
@@ -393,11 +402,11 @@ export default function Home() {
         </div>
 
         {/* COLOR GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 py-4 max-w-[800px] mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 py-4 max-w-200 mx-auto">
           {colorCards.map((c) => (
             <div
               key={c.id}
-              className="h-[130px] rounded-xl flex items-center justify-center font-bold text-white text-lg"
+              className="h-32.5 rounded-xl flex items-center justify-center font-bold text-white text-lg"
               style={{ background: c.gradient }}
             >
               {c.label}

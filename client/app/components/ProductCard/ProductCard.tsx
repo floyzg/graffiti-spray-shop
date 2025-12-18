@@ -3,6 +3,7 @@
 import React from "react";
 import { useCart } from "@/context/useCart";
 import { CartItem } from "@/context/CartProvider";
+import Image from "next/image";
 
 interface ProductCardProps {
   product: Omit<CartItem, "count">;
@@ -16,15 +17,18 @@ export default function ProductCard({ product }: ProductCardProps) {
   const count = itemInCart ? itemInCart.count : 0;
 
   return (
-    <div className="shrink-0 w-[244px] bg-[#1F2937] rounded-lg">
-      <img
+    <div className="shrink-0 w-61 bg-[#1F2937] rounded-lg">
+      <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${image}`}
         className="w-full rounded-lg"
         alt={name}
+        width={200}
+        height={200}
+        priority={false}
       />
 
       <p
-        className="mt-[9px] ml-3 font-bold text-[18px] text-white"
+        className="mt-2.25 ml-3 font-bold text-[18px] text-white"
         style={{ fontFamily: "Oswald" }}
       >
         {name}
@@ -53,7 +57,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* ---- BUTTON / COUNTER SECTION ---- */}
       {count === 0 ? (
         <button
-          className="w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
+          className="w-54 h-8.75 ml-3 mb-3.5 mt-4 rounded-md"
           style={{ backgroundColor: accent }}
           onClick={() => addToCart(product)}
         >
@@ -69,7 +73,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </button>
       ) : (
         <div
-          className="flex items-center justify-between w-[216px] h-[35px] ml-3 mb-3.5 mt-4 rounded-md"
+          className="flex items-center justify-between w-54 h-8.75 ml-3 mb-3.5 mt-4 rounded-md"
           style={{ backgroundColor: accent }}
         >
           <button
